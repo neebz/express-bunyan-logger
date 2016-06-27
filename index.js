@@ -17,6 +17,7 @@ module.exports = function (opts) {
 module.exports.errorLogger = function (opts) {
     var logger, opts = opts || {}, format,
         immediate = false,
+        forensic = false,
         parseUA = true,
         excludes,
         obfuscate,
@@ -39,6 +40,11 @@ module.exports.errorLogger = function (opts) {
     if (opts.immediate) {
         immediate = opts.immediate;
         delete opts.immediate;
+    }
+
+    if (opts.forensic) {
+        forensic = opts.forensic;
+        delete opts.forensic;
     }
 
     if (opts.levelFn) {
@@ -186,6 +192,7 @@ module.exports.errorLogger = function (opts) {
             }
         }
 
+        if (forensic) logging(true);
 
         if (immediate) {
             logging(true);
